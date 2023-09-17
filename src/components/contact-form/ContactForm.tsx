@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import type { Form } from '../app/App';
+import type { Form, HandleSubmitProps } from '@types';
 
-const ContactForm = ({ contactCreate }: { contactCreate: (contact: Form) => void }) => {
+const ContactForm = ({ contactCreate }: HandleSubmitProps) => {
   const [form, setForm] = useState({ name: '', number: '' });
 
   const handleInput = (e: ChangeEvent) => {

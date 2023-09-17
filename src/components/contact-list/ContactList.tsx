@@ -1,12 +1,6 @@
-import type { Contact, ContactDeleteProp } from '../app/App';
+import type { ContactListProps } from '@types';
 
-const ContactList = ({
-  contacts,
-  contactDelete,
-}: {
-  contacts: Contact[];
-  contactDelete: ContactDeleteProp;
-}) => {
+const ContactList = ({ contacts, contactDelete }: ContactListProps) => {
   return (
     <ul>
       {contacts.map(({ id, name, number }) => {

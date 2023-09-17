@@ -3,30 +3,16 @@ import ContactForm from '../contact-form/ContactForm';
 import Filter from '../filter/Filter';
 import ContactList from '../contact-list/ContactList';
 import { nanoid } from 'nanoid';
+import type { Form, Contact } from '@types';
 
-export type Form = {
-  name: string;
-  number: string;
+const fetchContacts = (): Contact[] => {
+  const storageContacts = localStorage.getItem('contacts');
+  return storageContacts && JSON.parse(storageContacts).length ? JSON.parse(storageContacts) : [];
 };
-export type Contact = {
-  id: string;
-  name: string;
-  number: string;
-};
-export type HandleSubmitProps = {
-  contactCreate: (contact: Form) => void;
-};
-export type ContactDeleteProp = (id: string) => void;
 
 const App = () => {
-  const [contacts, setContacts] = useState([] as Contact[]);
+  const [contacts, setContacts] = useState(fetchContacts());
   const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    const storageContacts = localStorage.getItem('contacts');
-    if (storageContacts && JSON.parse(storageContacts).length)
-      setContacts(JSON.parse(storageContacts));
-  }, []);
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
