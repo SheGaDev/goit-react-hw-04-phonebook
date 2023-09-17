@@ -6,7 +6,9 @@ const ContactForm = ({ contactCreate }: { contactCreate: (contact: Form) => void
 
   const handleInput = (e: ChangeEvent) => {
     const { name, value }: { name: string; value: string } = e.target as HTMLInputElement;
-    setForm({ [name as keyof Form]: value } as Form);
+    setForm((prev: Form) => {
+      return { ...prev, [name as keyof Form]: value };
+    });
   };
 
   const handleSubmit = (e: FormEvent) => {
