@@ -6,12 +6,11 @@ import { nanoid } from 'nanoid';
 import type { Form, Contact } from '@types';
 
 const fetchContacts = (): Contact[] => {
-  const storageContacts = localStorage.getItem('contacts');
-  return storageContacts && JSON.parse(storageContacts).length ? JSON.parse(storageContacts) : [];
+  return JSON.parse(localStorage.getItem('contacts') as string) ?? [];
 };
 
 const App = () => {
-  const [contacts, setContacts] = useState(fetchContacts());
+  const [contacts, setContacts] = useState(fetchContacts);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
